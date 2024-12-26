@@ -1,0 +1,33 @@
+flowchart LR
+    %% Increase text size and make text bold for all nodes
+    RD["<b>Raw Data</b>"] --> KF["<b>Kalman Filter</b>"]
+    KF --> DB["<b>DBSCAN</b><br><b>Clustering</b>"]
+    KF --> IF["<b>Isolation</b><br><b>Forest</b>"]
+    
+    KF --> CS{"<b>Confidence</b><br><b>Scoring</b>"}
+    DB --> CS
+    IF --> CS
+    
+    subgraph RP["<b>Real-time Processing</b>"]
+        KF
+    end
+    
+    subgraph PR["<b>Pattern Recognition</b>"]
+        DB
+    end
+    
+    subgraph AD["<b>Anomaly Detection</b>"]
+        IF
+    end
+    
+    CS --> DF["<b>Decision</b><br><b>Fusion</b>"] --> FO["<b>Final</b><br><b>Output</b>"]
+    
+    %% Enhanced styling with better contrast and visibility
+    classDef processing fill:#2374ab,color:#fff,stroke-width:3px
+    classDef detection fill:#ff7e67,color:#fff,stroke-width:3px
+    classDef decision fill:#78a55a,color:#fff,stroke-width:3px
+    classDef default fill:#666,color:#fff,stroke-width:3px,font-size:14px
+    
+    class KF processing
+    class DB,IF detection
+    class CS,DF decision
