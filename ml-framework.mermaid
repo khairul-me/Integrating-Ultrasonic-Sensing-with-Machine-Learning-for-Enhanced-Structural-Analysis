@@ -1,0 +1,31 @@
+flowchart TB
+    RD[Raw Data] --> KF[Kalman Filter]
+    KF --> DB[DBSCAN Clustering]
+    KF --> IF[Isolation Forest]
+    
+    KF --> CS{Confidence Scoring}
+    DB --> CS
+    IF --> CS
+    
+    subgraph "Real-time Processing"
+        KF
+    end
+    
+    subgraph "Pattern Recognition"
+        DB
+    end
+    
+    subgraph "Anomaly Detection"
+        IF
+    end
+    
+    CS --> DF[Decision Fusion]
+    DF --> FO[Final Output]
+    
+    classDef processing fill:#2374ab
+    classDef detection fill:#ff7e67
+    classDef decision fill:#78a55a
+    
+    class KF processing
+    class DB,IF detection
+    class CS,DF decision
